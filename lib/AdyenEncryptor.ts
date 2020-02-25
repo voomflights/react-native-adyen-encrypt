@@ -1,4 +1,4 @@
-import { NativeModules } from "react-native"
+import { NativeModules, NativeEventEmitter } from "react-native"
 
 interface CardForm {
   cardNumber: string
@@ -7,17 +7,39 @@ interface CardForm {
   expiryYear: string
 }
 
-const { AdyenEncryptor: NativeAdyenEncryptor } = NativeModules
+interface EncryptedCard {
+  encryptedCardNumber: string
+  encryptedExpiryMonth: string
+  encryptedExpiryYear: string
+  encryptedSecurityCode: string
+}
+
+const {
+  AdyenEncryptor: NativeAdyenEncryptor,
+  RNAdyenEventEmitter
+} = NativeModules
 
 class AdyenEncryptor {
-  constructor(private adyenPublicKey: string) {}
+  private emitter: NativeEventEmitter
+  constructor(private adyenPublicKey: string) {
+    this.emitter = new NativeEventEmitter(RNAdyenEventEmitter)
+  }
 
-  encryptCard(cardForm: CardForm) {
+  encryptCard(cardForm: CardForm): Promise<EncryptedCard> {
     const data = {
       ...cardForm,
       publicKey: this.adyenPublicKey
     }
-    NativeAdyenEncryptor.encryptWithData(data)
+    return new Promise((resolve, reject) => {
+      const adyenSubscription = this.emitter.addListener(
+        "AdyenCardEncryptedSuccess",
+        data => {
+          adyenSubscription.remove()
+          resolve(data)
+        }
+      )
+      NativeAdyenEncryptor.encryptWithData(data)
+    })
   }
 }
 
