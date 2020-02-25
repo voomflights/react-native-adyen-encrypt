@@ -30,16 +30,28 @@ class AdyenEncryptor {
       ...cardForm,
       publicKey: this.adyenPublicKey
     }
-    return new Promise((resolve, reject) => {
-      const adyenSubscription = this.emitter.addListener(
+    let successSubscription: any
+    let failureSubscription: any
+    const promise = new Promise<EncryptedCard>((resolve, reject) => {
+      successSubscription = this.emitter.addListener(
         "AdyenCardEncryptedSuccess",
-        result => {
-          adyenSubscription.remove()
+        (result: EncryptedCard) => {
           resolve(result)
+        }
+      )
+      failureSubscription = this.emitter.addListener(
+        "AdyenCardEncryptedFailure",
+        error => {
+          reject(error)
         }
       )
       NativeAdyenEncryptor.encryptWithData(data)
     })
+    promise.finally(() => {
+      successSubscription.remove()
+      failureSubscription.remove()
+    })
+    return promise
   }
 }
 
