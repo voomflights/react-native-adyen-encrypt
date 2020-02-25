@@ -33,7 +33,7 @@ buildscript {
             jcenter()
         }
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.4.1'
+            classpath 'com.android.tools.build:gradle:3.4.2'
         }
     }
 }
@@ -73,6 +73,7 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
+    implementation "com.adyen.checkout:card-ui:3.6.4"
 }
 
 def configureReactNativePom(def pom) {

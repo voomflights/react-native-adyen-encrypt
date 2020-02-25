@@ -30,6 +30,7 @@ class AdyenEncryptor {
       ...cardForm,
       publicKey: this.adyenPublicKey
     }
+    console.log("data", data)
     let successSubscription: any
     let failureSubscription: any
     const promise = new Promise<EncryptedCard>((resolve, reject) => {
