@@ -33,9 +33,9 @@ class AdyenEncryptor {
     return new Promise((resolve, reject) => {
       const adyenSubscription = this.emitter.addListener(
         "AdyenCardEncryptedSuccess",
-        data => {
+        result => {
           adyenSubscription.remove()
-          resolve(data)
+          resolve(result)
         }
       )
       NativeAdyenEncryptor.encryptWithData(data)

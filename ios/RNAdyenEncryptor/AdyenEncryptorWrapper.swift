@@ -9,21 +9,11 @@
 import Adyen
 
 @objc public class AdyenEncryptorWrapper: NSObject {
-  @objc public var addressCity: String?
-  @objc public var addressCountry: String?
-  @objc public var addressCountryCode: String?
-  @objc public var addressStreet: String?
-  @objc public var addressHouseNumber: String?
-  @objc public var addressState: String?
-  @objc public var addressZip: String?
-  @objc public var cardNickname: String?
   @objc public var cardNumber: String?
   @objc public var expiryMonth: String?
   @objc public var expiryYear: String?
-  @objc public var name: String?
   @objc public var publicKey: String?
   @objc public var securityCode: String?
-  @objc public var taxIdentifier: String?
 
 
   @objc public func encryptCard() {
@@ -32,7 +22,7 @@ import Adyen
   }
 
   @objc public func encryptCard(number: String?, securityCode: String?, expiryMonth: String?, expiryYear: String?, publicKey: String) {
-    let cardData = EncryptedCardData(addressCity: addressCity, addressCountry: addressCountry, addressCountryCode: addressCountryCode, addressStreet: addressStreet, addressHouseNumber: addressHouseNumber, addressState: addressState, addressZip: addressZip, cardNumber: cardNumber, expiryMonth: expiryMonth, expiryYear: expiryYear, securityCode: securityCode, cardNickname: cardNickname, name: name, taxIdentifier: taxIdentifier, publicKey: publicKey)
+    let cardData = EncryptedCardData(cardNumber: cardNumber, expiryMonth: expiryMonth, expiryYear: expiryYear, securityCode: securityCode, publicKey: publicKey)
     RNAdyenEventEmitter.sharedInstance().emitEncryptedCard(cardData.toJSON)
   }
 }
