@@ -26,7 +26,7 @@ https://github.com/voomflights/react-native-adyen-encrypt-example
 ```javascript
 import {AdyenEncryptor, CardForm} from 'react-native-adyen-encrypt'
 
-let cardForm: CardForm = {
+const cardForm: CardForm = {
   cardNumber: "654654654654654",
   securityCode: "999",
   expiryMonth: "13",
