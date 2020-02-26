@@ -7,7 +7,7 @@
 //
 
 #import "RNAdyenEncryptor.h"
-#import <react_native_adyen-Swift.h>
+#import <react_native_adyen_encrypt-Swift.h>
 
 @implementation RNAdyenEncryptor
 
