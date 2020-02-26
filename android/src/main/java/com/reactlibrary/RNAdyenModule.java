@@ -1,23 +1,16 @@
 package com.reactlibrary;
 
-import android.support.annotation.NonNull;
-
 import com.adyen.checkout.cse.Card;
 import com.adyen.checkout.cse.CardEncryptor;
 import com.adyen.checkout.cse.EncryptedCard;
-import com.adyen.checkout.cse.EncryptionException;
 import com.adyen.checkout.cse.internal.CardEncryptorImpl;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.ReadableNativeMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-import adyen.com.adyencse.encrypter.exception.EncrypterException;
 
 public class RNAdyenModule extends ReactContextBaseJavaModule {
 

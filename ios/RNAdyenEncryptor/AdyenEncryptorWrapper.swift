@@ -22,7 +22,11 @@ import Adyen
   }
 
   @objc public func encryptCard(number: String?, securityCode: String?, expiryMonth: String?, expiryYear: String?, publicKey: String) {
-    let cardData = EncryptedCardData(cardNumber: cardNumber, expiryMonth: expiryMonth, expiryYear: expiryYear, securityCode: securityCode, publicKey: publicKey)
+    let cardData = EncryptedCardData(cardNumber: cardNumber,
+                                     expiryMonth: expiryMonth,
+                                     expiryYear: expiryYear,
+                                     securityCode: securityCode,
+                                     publicKey: publicKey)
     RNAdyenEventEmitter.sharedInstance().emitEncryptedCard(cardData.toJSON)
   }
 }

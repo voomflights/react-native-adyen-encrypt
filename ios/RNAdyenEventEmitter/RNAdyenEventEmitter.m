@@ -38,8 +38,4 @@ static RNAdyenEventEmitter *sharedInstance = nil;
   [self sendEventWithName:@"AdyenCardEncryptedSuccess" body:body];
 }
 
-- (void)emitFailure:(id)error {
-  [self sendEventWithName:@"AdyenCardEncryptedFailure" body:error];
-}
-
 @end
