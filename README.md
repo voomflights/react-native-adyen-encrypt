@@ -19,7 +19,7 @@
 
 ### Example App
 
-https://github.com/voomflights/react-native-adyen-example
+https://github.com/voomflights/react-native-adyen-encrypt-example
 
 ### Code Snippet
 
