@@ -33,19 +33,25 @@ public class RNAdyenModule extends ReactContextBaseJavaModule {
         String expiryMonth = cardData.getString("expiryMonth");
         String expiryYear = cardData.getString("expiryYear");
         String publicKey = cardData.getString("publicKey");
-        CardEncryptor encryptor = new CardEncryptorImpl();
-        Card card = new Card.Builder()
-                .setNumber(cardNumber)
-                .setSecurityCode(securityCode)
-                .setExpiryDate(Integer.parseInt(expiryMonth), Integer.parseInt(expiryYear))
-                .build();
-        EncryptedCard encryptedCard = encryptor.encryptFields(card, publicKey);
-
         WritableNativeMap encryptedCardMap = new WritableNativeMap();
-        encryptedCardMap.putString("encryptedCardNumber", encryptedCard.getEncryptedNumber());
-        encryptedCardMap.putString("encryptedSecurityCode", encryptedCard.getEncryptedSecurityCode());
-        encryptedCardMap.putString("encryptedExpiryMonth", encryptedCard.getEncryptedExpiryMonth());
-        encryptedCardMap.putString("encryptedExpiryYear", encryptedCard.getEncryptedExpiryYear());
+
+        try {
+            CardEncryptor encryptor = new CardEncryptorImpl();
+            Card card = new Card.Builder()
+                    .setNumber(cardNumber)
+                    .setSecurityCode(securityCode)
+                    .setExpiryDate(Integer.parseInt(expiryMonth), Integer.parseInt(expiryYear))
+                    .build();
+            EncryptedCard encryptedCard = encryptor.encryptFields(card, publicKey);
+
+            encryptedCardMap.putString("encryptedCardNumber", encryptedCard.getEncryptedNumber());
+            encryptedCardMap.putString("encryptedSecurityCode", encryptedCard.getEncryptedSecurityCode());
+            encryptedCardMap.putString("encryptedExpiryMonth", encryptedCard.getEncryptedExpiryMonth());
+            encryptedCardMap.putString("encryptedExpiryYear", encryptedCard.getEncryptedExpiryYear());
+        } catch (Exception e) {
+            encryptedCardMap.putString("error", e.toString());
+            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("AdyenCardEncryptedError", encryptedCardMap);
+        }
 
         reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("AdyenCardEncryptedSuccess", encryptedCardMap);
     }

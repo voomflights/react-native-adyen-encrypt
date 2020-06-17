@@ -144,7 +144,7 @@ afterEvaluate { project ->
         repositories.mavenDeployer {
             // Deploy to react-native-event-bridge/maven, ready to publish to npm
             repository url: "file://${projectDir}/../android/maven"
-            configureReactNativePom pom
+//            configureReactNativePom pom
         }
     }
 }

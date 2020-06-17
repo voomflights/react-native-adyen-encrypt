@@ -18,14 +18,17 @@ public struct EncryptedCardData {
 
   var toJSON: [String: String] {
     let card = CardEncryptor.Card(number: cardNumber, securityCode: securityCode, expiryMonth: expiryMonth, expiryYear: expiryYear)
-    let encryptedCard = CardEncryptor.encryptedCard(for: card, publicKey: publicKey)
-
     var json: [String: String] = [:]
-    if cardNumber != nil { json["encryptedCardNumber"] = encryptedCard.number }
-    if expiryMonth != nil { json["encryptedExpiryMonth"] = encryptedCard.expiryMonth }
-    if expiryYear != nil { json["encryptedExpiryYear"] = encryptedCard.expiryYear }
-    if securityCode != nil { json["encryptedSecurityCode"] = encryptedCard.securityCode }
+    do {
+        let encryptedCard = try CardEncryptor.encryptedCard(for: card, publicKey: publicKey)
 
+        if cardNumber != nil { json["encryptedCardNumber"] = encryptedCard.number }
+        if expiryMonth != nil { json["encryptedExpiryMonth"] = encryptedCard.expiryMonth }
+        if expiryYear != nil { json["encryptedExpiryYear"] = encryptedCard.expiryYear }
+        if securityCode != nil { json["encryptedSecurityCode"] = encryptedCard.securityCode }
+    } catch {
+        json["error"] = error.localizedDescription
+    }
     return json
   }
 }
