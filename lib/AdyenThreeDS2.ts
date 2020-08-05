@@ -2,7 +2,7 @@
 import { NativeModules, NativeEventEmitter } from "react-native";
 
 const {
-  AdyenEncryptor: NativeAdyenEncryptor,
+    AdyenThreeDS2: NativeAdyenThreeDS2,
   RNAdyenEventEmitter
 } = NativeModules;
 
@@ -16,7 +16,7 @@ class AdyenThreeDS2 {
     // @ts-ignore
     const promise = new Promise<String>((resolve, reject) => {
       const successSubscription = this.emitter.addListener(
-        "AdyenCardEncryptedSuccess",
+        "threeds2.fingerprint",
         (result: String) => {
           successSubscription.remove();
           resolve(result);
@@ -29,7 +29,9 @@ class AdyenThreeDS2 {
             reject(result)
           }
       );
-      NativeAdyenEncryptor.identify(fingerprintToken);
+      console.log('NativeAdyenThreeDS2',NativeAdyenThreeDS2)
+        NativeAdyenThreeDS2.identify(fingerprintToken);
+
     })
     return promise;
   }

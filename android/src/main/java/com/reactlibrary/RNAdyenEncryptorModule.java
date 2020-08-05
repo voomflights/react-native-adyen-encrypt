@@ -1,6 +1,6 @@
 package com.reactlibrary;
 
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import com.adyen.checkout.adyen3ds2.Adyen3DS2Component;
 import com.adyen.checkout.base.Component;

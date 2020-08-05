@@ -1,12 +1,12 @@
 package com.reactlibrary;
 
 import android.app.Activity;
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.Observer;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 
 import com.adyen.checkout.adyen3ds2.Adyen3DS2Component;
@@ -19,9 +19,12 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import android.os.Handler;
 import android.os.Looper;
+import androidx.fragment.app.Fragment;
+import android.util.Log;
 
 import org.jdeferred2.Deferred;
 import org.jdeferred2.DoneCallback;
@@ -100,7 +103,6 @@ public class RNAdyenThreeDS2Module extends ReactContextBaseJavaModule implements
 
         this.callback = callback;
 
-
         final RNAdyenThreeDS2Module me = this;
         if (authenticator == null) {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -116,14 +118,14 @@ public class RNAdyenThreeDS2Module extends ReactContextBaseJavaModule implements
                         final FragmentActivity fragmentActivity = (FragmentActivity) activity;
                         authenticator = Adyen3DS2Component.PROVIDER.get(fragmentActivity);
 
-                        authenticator.observe(me, new Observer<ActionComponentData>() {
+                        authenticator.observe(fragmentActivity, new Observer<ActionComponentData>() {
                             @Override
                             public void onChanged(@Nullable ActionComponentData actionComponentData) {
                                 RNAdyenThreeDS2Module.this.callback.onSuccess(actionComponentData);
                             }
                         });
 
-                        authenticator.observeErrors(me, new Observer<ComponentError>() {
+                        authenticator.observeErrors(fragmentActivity, new Observer<ComponentError>() {
                             @Override
                             public void onChanged(@Nullable ComponentError componentError) {
                                 RNAdyenThreeDS2Module.this.callback.onError(componentError);
@@ -147,9 +149,11 @@ public class RNAdyenThreeDS2Module extends ReactContextBaseJavaModule implements
         getAuthenticator(new Callback() {
             @Override
             public void onSuccess(ActionComponentData data) {
+                Log.d("moduleRek","onSuccess");
                 final JSONObject details = data.getDetails();
                 final String result = details.optString(resultKey);
 
+                Log.d("moduleRek","onSuccess " + result);
               //  if (!TextUtils.isEmpty(result)) {
                     promise.resolve(result);
                // }
@@ -157,6 +161,8 @@ public class RNAdyenThreeDS2Module extends ReactContextBaseJavaModule implements
 
             @Override
             public void onError(ComponentError error) {
+
+                Log.d("moduleRek","ComponentError");
              //   ReadableMap readableError = fromThrowable(error.getException());
                 promise.reject("xxx", error.getErrorMessage(), error.getException());
             }
@@ -174,6 +180,8 @@ public class RNAdyenThreeDS2Module extends ReactContextBaseJavaModule implements
         }, new FailCallback<Throwable>() {
             @Override
             public void onFail(Throwable result) {
+
+                Log.d("moduleRek","onFail" + result.toString());
                /* ReadableMap error = fromThrowable(result);
                 if (error != null) {
                     promise.reject(error.getString("code"), error.getString("message"), result);
@@ -187,12 +195,20 @@ public class RNAdyenThreeDS2Module extends ReactContextBaseJavaModule implements
 
     @ReactMethod
     public void identify(final String fingerprintToken, final Promise promise) {
-        Threeds2FingerprintAction action = new Threeds2FingerprintAction();
+        Log.d("moduleRek",fingerprintToken);
+       Threeds2FingerprintAction action = new Threeds2FingerprintAction();
 
         action.setToken(fingerprintToken);
         action.setType(Threeds2FingerprintAction.ACTION_TYPE);
 
         dispatchAction(action, "threeds2.fingerprint", promise);
+
+        /*reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("AdyenCardEncryptedSuccess", "xxx");
+
+        promise.resolve("holaa");*/
+
+      //  reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("threeds2.fingerprint", "caquita1000");
+
     }
 
     @ReactMethod
