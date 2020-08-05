@@ -1,6 +1,7 @@
 package com.reactlibrary;
 
 import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
@@ -20,8 +21,14 @@ public class RNAdyenPackage implements ReactPackage {
             ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
 
-        modules.add(new RNAdyenModule(reactContext));
+        modules.add(new RNAdyenEncryptorModule(reactContext));
+        modules.add(new RNAdyenThreeDS2Module(reactContext));
 
         return modules;
+    }
+
+    @Override
+    public List<Class<? extends JavaScriptModule>> createJSModules() {
+        return Collections.emptyList();
     }
 }

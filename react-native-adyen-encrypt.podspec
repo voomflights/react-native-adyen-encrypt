@@ -20,5 +20,6 @@ Pod::Spec.new do |s|
 
   s.dependency "React"
   s.dependency "Adyen"
+  s.dependency 'Adyen3DS2', '2.1.0-rc.5'
 end
 

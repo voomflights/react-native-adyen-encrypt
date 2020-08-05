@@ -1,5 +1,10 @@
 package com.reactlibrary;
 
+import android.support.v4.app.FragmentActivity;
+
+import com.adyen.checkout.adyen3ds2.Adyen3DS2Component;
+import com.adyen.checkout.base.Component;
+import com.adyen.checkout.base.model.payments.response.Threeds2FingerprintAction;
 import com.adyen.checkout.cse.Card;
 import com.adyen.checkout.cse.CardEncryptor;
 import com.adyen.checkout.cse.EncryptedCard;
@@ -12,11 +17,11 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 
-public class RNAdyenModule extends ReactContextBaseJavaModule {
+public class RNAdyenEncryptorModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
 
-    public RNAdyenModule(ReactApplicationContext reactContext) {
+    public RNAdyenEncryptorModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
     }
@@ -55,4 +60,6 @@ public class RNAdyenModule extends ReactContextBaseJavaModule {
 
         reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("AdyenCardEncryptedSuccess", encryptedCardMap);
     }
+
+
 }
