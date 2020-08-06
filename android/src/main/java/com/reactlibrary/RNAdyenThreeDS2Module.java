@@ -113,7 +113,6 @@ public class RNAdyenThreeDS2Module extends ReactContextBaseJavaModule implements
             public void onSuccess(ActionComponentData data) {
                 final JSONObject details = data.getDetails();
                 final String result = details.optString(resultKey);
-
                 if (!result.isEmpty()){
                     promise.resolve(result);
                 }else{
@@ -152,24 +151,17 @@ public class RNAdyenThreeDS2Module extends ReactContextBaseJavaModule implements
 
     @ReactMethod
     public void identify(final String fingerprintToken, final Promise promise) {
-        Log.d("moduleRek",fingerprintToken);
        Threeds2FingerprintAction action = new Threeds2FingerprintAction();
-
-        action.setToken(fingerprintToken);
-        action.setType(Threeds2FingerprintAction.ACTION_TYPE);
-
-        dispatchAction(action, "threeds2.fingerprint", promise);
-
+       action.setToken(fingerprintToken);
+       action.setType(Threeds2FingerprintAction.ACTION_TYPE);
+       dispatchAction(action, "threeds2.fingerprint", promise);
     }
 
     @ReactMethod
     public void challenge(final String challengeToken, final Promise promise) {
-
         Threeds2ChallengeAction action = new Threeds2ChallengeAction();
-
         action.setToken(challengeToken);
         action.setType(Threeds2ChallengeAction.ACTION_TYPE);
-
         dispatchAction(action, "threeds2.challengeResult", promise);
     }
 
