@@ -7,7 +7,8 @@
   "repository": "github:voomflights/react-native-adyen-encrypt",
   "keywords": [
     "react-native",
-    "adyen"
+    "adyen",
+    "Adyen3DS2"
   ],
   "author": {
     "name": "Voom Pair",
@@ -16,7 +17,8 @@
   "contributors": [
     "Antoine Dreessen <anthonydreessen@gmail.com> (https://plenti.dev)",
     "Emily Gordon <emgord@gmail.com>",
-    "Evgenii Evstropov <evgenii.evstropov@gmail.com>"
+    "Evgenii Evstropov <evgenii.evstropov@gmail.com>",
+    "Kenneth Rangel <kennethrc@gmail.com>"
   ],
   "license": "MIT",
   "readmeFilename": "README.md",
