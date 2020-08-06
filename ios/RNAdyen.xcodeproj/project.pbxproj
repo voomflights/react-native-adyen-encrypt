@@ -11,6 +11,7 @@
 		90BE078C2404A987000A1DB4 /* EncryptedCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE078B2404A987000A1DB4 /* EncryptedCardData.swift */; };
 		90BE078F2404A9A0000A1DB4 /* RNAdyenEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BE078E2404A9A0000A1DB4 /* RNAdyenEncryptor.m */; };
 		90BE07932404A9CD000A1DB4 /* RNAdyenEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BE07922404A9CD000A1DB4 /* RNAdyenEventEmitter.m */; };
+		E94C24D324DC06580002AABA /* RNAdyenThreeDS2.m in Sources */ = {isa = PBXBuildFile; fileRef = E94C24D124DC06580002AABA /* RNAdyenThreeDS2.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,8 @@
 		90BE07912404A9CD000A1DB4 /* RNAdyenEventEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNAdyenEventEmitter.h; sourceTree = "<group>"; };
 		90BE07922404A9CD000A1DB4 /* RNAdyenEventEmitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNAdyenEventEmitter.m; sourceTree = "<group>"; };
 		90BE07AA2404B02B000A1DB4 /* RNAdyen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNAdyen.h; sourceTree = "<group>"; };
+		E94C24D124DC06580002AABA /* RNAdyenThreeDS2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNAdyenThreeDS2.m; sourceTree = "<group>"; };
+		E94C24D224DC06580002AABA /* RNAdyenThreeDS2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNAdyenThreeDS2.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				E94C24CE24DC06210002AABA /* RNAdyenThreeDS2 */,
 				90BE07AA2404B02B000A1DB4 /* RNAdyen.h */,
 				90BE07902404A9B6000A1DB4 /* RNAdyenEventEmitter */,
 				90BE07882404A958000A1DB4 /* RNAdyenEncryptor */,
@@ -83,6 +87,15 @@
 				90BE07922404A9CD000A1DB4 /* RNAdyenEventEmitter.m */,
 			);
 			path = RNAdyenEventEmitter;
+			sourceTree = "<group>";
+		};
+		E94C24CE24DC06210002AABA /* RNAdyenThreeDS2 */ = {
+			isa = PBXGroup;
+			children = (
+				E94C24D224DC06580002AABA /* RNAdyenThreeDS2.h */,
+				E94C24D124DC06580002AABA /* RNAdyenThreeDS2.m */,
+			);
+			path = RNAdyenThreeDS2;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +159,7 @@
 				90BE078C2404A987000A1DB4 /* EncryptedCardData.swift in Sources */,
 				90BE07932404A9CD000A1DB4 /* RNAdyenEventEmitter.m in Sources */,
 				90BE078A2404A972000A1DB4 /* AdyenEncryptorWrapper.swift in Sources */,
+				E94C24D324DC06580002AABA /* RNAdyenThreeDS2.m in Sources */,
 				90BE078F2404A9A0000A1DB4 /* RNAdyenEncryptor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
