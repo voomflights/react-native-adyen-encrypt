@@ -7,7 +7,6 @@
 //
 
 #import <React/RCTBridgeModule.h>
-//#import "RNAdyen-Swift.h"
 
 @interface RNAdyenEncryptor : NSObject <RCTBridgeModule>
 

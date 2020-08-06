@@ -17,17 +17,15 @@ RCT_REMAP_METHOD(identify, fingerprintToken: (NSString *)fingerprintToken
 resolver:(RCTPromiseResolveBlock)resolve
 rejecter:(RCTPromiseRejectBlock)reject)
 {
-    
-  
+    resolve(@"hallo identify");
 }
 
 RCT_REMAP_METHOD(challenge, challengeToken: (NSString *)challengeToken
 resolver:(RCTPromiseResolveBlock)resolve
 rejecter:(RCTPromiseRejectBlock)reject)
 {
-    
+     resolve(@"hallo challenge");
 }
-
 
 @end
 
