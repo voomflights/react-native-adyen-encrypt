@@ -11,10 +11,20 @@
 
 @implementation RNAdyenThreeDS2
 
-RCT_EXPORT_MODULE(RNAdyenThreeDS2);
+RCT_EXPORT_MODULE(AdyenThreeDS2);
 
-RCT_EXPORT_METHOD(encryptWithData: (NSDictionary *)data) {
+RCT_REMAP_METHOD(identify, fingerprintToken: (NSString *)fingerprintToken
+resolver:(RCTPromiseResolveBlock)resolve
+rejecter:(RCTPromiseRejectBlock)reject)
+{
+    
   
+}
+
+RCT_REMAP_METHOD(challenge, challengeToken: (NSString *)challengeToken
+resolver:(RCTPromiseResolveBlock)resolve
+rejecter:(RCTPromiseRejectBlock)reject)
+{
     
 }
 

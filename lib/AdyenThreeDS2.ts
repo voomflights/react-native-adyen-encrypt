@@ -7,6 +7,8 @@ const {
 
 class AdyenThreeDS2 {
     identify(fingerprintToken: String): Promise<String> {
+        console.log('fingerprintToken',fingerprintToken);
+        console.log('NativeAdyenThreeDS2',NativeAdyenThreeDS2)
         return NativeAdyenThreeDS2.identify(fingerprintToken);
     }
     challenge(challengeToken: String): Promise<String> {
