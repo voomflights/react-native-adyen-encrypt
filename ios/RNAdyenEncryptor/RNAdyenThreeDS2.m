@@ -17,14 +17,16 @@ RCT_REMAP_METHOD(identify, fingerprintToken: (NSString *)fingerprintToken
 resolver:(RCTPromiseResolveBlock)resolve
 rejecter:(RCTPromiseRejectBlock)reject)
 {
-    resolve(@"hallo identify");
+    AdyenThreeDS2Wrapper *wrapper = [[AdyenThreeDS2Wrapper alloc] init];
+    [wrapper identifyWithFingerprintToken:fingerprintToken resolve:resolve reject:reject];
 }
 
 RCT_REMAP_METHOD(challenge, challengeToken: (NSString *)challengeToken
 resolver:(RCTPromiseResolveBlock)resolve
 rejecter:(RCTPromiseRejectBlock)reject)
 {
-     resolve(@"hallo challenge");
+    AdyenThreeDS2Wrapper *wrapper = [[AdyenThreeDS2Wrapper alloc] init];
+    [wrapper challengerWithChallengeToken:challengeToken resolve:resolve reject:reject];
 }
 
 @end

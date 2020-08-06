@@ -34,7 +34,7 @@ import org.jdeferred2.impl.DeferredObject;
 import org.json.JSONObject;
 
 
-public class RNAdyenThreeDS2Module extends ReactContextBaseJavaModule implements LifecycleOwner{
+public class RNAdyenThreeDS2Module extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
 
@@ -51,12 +51,6 @@ public class RNAdyenThreeDS2Module extends ReactContextBaseJavaModule implements
     private Adyen3DS2Component authenticator;
 
     private Callback callback;
-
-    @NonNull
-    @Override
-    public Lifecycle getLifecycle() {
-        return null;
-    }
 
     private interface Callback {
         void onSuccess(ActionComponentData data);
