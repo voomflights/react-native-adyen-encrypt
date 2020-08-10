@@ -40,4 +40,16 @@ RCT_EXPORT_METHOD(encryptWithData: (NSDictionary *)data) {
   }
 }
 
+RCT_EXPORT_METHOD(identify: (NSString *)identifyToken) {
+    NSLog(@"identify %@", identifyToken);
+    AdyenThreeDS2Wrapper *wrapper = [AdyenThreeDS2Wrapper new];
+    [wrapper identify:identifyToken];
+}
+
+RCT_EXPORT_METHOD(challenge: (NSString *)challengeToken) {
+    AdyenThreeDS2Wrapper *wrapper = [[AdyenThreeDS2Wrapper alloc] init];
+    [wrapper challenger:challengeToken];
+}
+
+
 @end

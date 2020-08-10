@@ -49,6 +49,49 @@ class AdyenEncryptor {
     })
     return promise
   }
+
+  identify(fingerprintTokenZZZZ: String): Promise<any> {
+    const promise = new Promise<any>((resolve, reject) => {
+        const successSubscription = this.emitter.addListener(
+          "AdyenCardEncryptedSuccess",
+          (result: any) => {
+            successSubscription.remove()
+            resolve(result)
+          }
+        )
+        const errorSubscription = this.emitter.addListener(
+            "AdyenCardEncryptedError",
+            (result: any) => {
+              errorSubscription.remove()
+              reject(result)
+            }
+        )
+        NativeAdyenEncryptor.identify(fingerprintTokenZZZZ);
+      });
+    return promise;
+}
+
+challenge(challengeToken: String): Promise<String> {
+    const promise = new Promise<String>((resolve, reject) => {
+        const successSubscription = this.emitter.addListener(
+          "AdyenThreeDS2Success",
+          (result: String) => {
+            successSubscription.remove()
+            resolve(result)
+          }
+        );
+        const errorSubscription = this.emitter.addListener(
+            "AdyenThreeDS2Error",
+            (result: String) => {
+              errorSubscription.remove()
+              reject(result)
+            }
+        );
+        NativeAdyenEncryptor.challenge(challengeToken);
+      });
+    return promise;
+}
+
 }
 
 export default AdyenEncryptor
