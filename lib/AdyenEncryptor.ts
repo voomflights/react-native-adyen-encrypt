@@ -50,7 +50,7 @@ class AdyenEncryptor {
     return promise
   }
 
-  identify(fingerprintTokenZZZZ: String): Promise<any> {
+  identify(token: String): Promise<any> {
     const promise = new Promise<any>((resolve, reject) => {
         const successSubscription = this.emitter.addListener(
           "AdyenCardEncryptedSuccess",
@@ -66,12 +66,12 @@ class AdyenEncryptor {
               reject(result)
             }
         )
-        NativeAdyenEncryptor.identify(fingerprintTokenZZZZ);
+        NativeAdyenEncryptor.identify(token);
       });
     return promise;
 }
 
-challenge(challengeToken: String): Promise<String> {
+challenge(token: String): Promise<String> {
     const promise = new Promise<String>((resolve, reject) => {
         const successSubscription = this.emitter.addListener(
           "AdyenThreeDS2Success",
@@ -87,7 +87,7 @@ challenge(challengeToken: String): Promise<String> {
               reject(result)
             }
         );
-        NativeAdyenEncryptor.challenge(challengeToken);
+        NativeAdyenEncryptor.challenge(token);
       });
     return promise;
 }

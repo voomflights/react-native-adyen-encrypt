@@ -29,7 +29,7 @@ let base64Encoded2 = "eyJkaXJlY3RvcnlTZXJ2ZXJJZCI6IkYwMTMzNzEzMzciLCJkaXJlY3Rvcn
           //   let decodedString2 = String(data: decodedData2, encoding: .utf8)!
         
         
-        let action = ThreeDS2FingerprintAction(token: base64Encoded2, paymentData: "")
+        let action = ThreeDS2FingerprintAction(token: fingerprintToken, paymentData: "")
         self.threeDS2Component.handle(action)
     }
     
