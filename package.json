@@ -7,8 +7,7 @@
   "repository": "github:voomflights/react-native-adyen-encrypt",
   "keywords": [
     "react-native",
-    "adyen",
-    "Adyen3DS2"
+    "adyen"
   ],
   "author": {
     "name": "Voom Pair",

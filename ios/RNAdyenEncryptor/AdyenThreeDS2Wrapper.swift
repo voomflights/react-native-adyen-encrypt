@@ -5,8 +5,6 @@
 //  Created by Kenneth Rangel on 06.08.20.
 //
 
-import Adyen3DS2
-
 @objc public class AdyenThreeDS2Wrapper: NSObject {
     @objc public func identify(_ fingerprintToken: String?) {
         guard let fingerprintToken = fingerprintToken else { return }
