@@ -55,15 +55,15 @@ class AdyenEncryptor {
         const successSubscription = this.emitter.addListener(
           "AdyenCardEncryptedSuccess",
           (result: any) => {
-            successSubscription.remove()
+            successSubscription.remove();
             resolve(result)
           }
         )
         const errorSubscription = this.emitter.addListener(
             "AdyenCardEncryptedError",
             (result: any) => {
-              errorSubscription.remove()
-              reject(result)
+              errorSubscription.remove();
+              reject(result);
             }
         )
         NativeAdyenEncryptor.identify(token);
@@ -74,14 +74,14 @@ class AdyenEncryptor {
 challenge(token: String): Promise<String> {
     const promise = new Promise<String>((resolve, reject) => {
         const successSubscription = this.emitter.addListener(
-          "AdyenThreeDS2Success",
+          "AdyenCardEncryptedSuccess",
           (result: String) => {
             successSubscription.remove()
             resolve(result)
           }
         );
         const errorSubscription = this.emitter.addListener(
-            "AdyenThreeDS2Error",
+            "AdyenCardEncryptedError",
             (result: String) => {
               errorSubscription.remove()
               reject(result)

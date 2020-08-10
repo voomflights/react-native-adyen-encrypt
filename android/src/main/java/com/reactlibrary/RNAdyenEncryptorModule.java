@@ -135,7 +135,7 @@ public class RNAdyenEncryptorModule extends ReactContextBaseJavaModule {
                 final JSONObject details = data.getDetails();
                 final String result = details.optString(resultKey);
                 if (!result.isEmpty()){
-                    reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("AdyenCardEncryptedSuccess", result);
+                    reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("AdyenCardEncryptedSuccess", details.toString());
                 }else{
                     reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("AdyenCardEncryptedError","String is empty?");
                 }
