@@ -170,17 +170,17 @@ public class RNAdyenEncryptorModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void identify(final String fingerprintToken) {
+    public void identify(final String token, final String paymentData) {
         Threeds2FingerprintAction action = new Threeds2FingerprintAction();
-        action.setToken(fingerprintToken);
+        action.setToken(token);
         action.setType(Threeds2FingerprintAction.ACTION_TYPE);
         dispatchAction(action, "threeds2.fingerprint");
     }
 
     @ReactMethod
-    public void challenge(final String challengeToken) {
+    public void challenge(final String token, final String paymentData) {
         Threeds2ChallengeAction action = new Threeds2ChallengeAction();
-        action.setToken(challengeToken);
+        action.setToken(token);
         action.setType(Threeds2ChallengeAction.ACTION_TYPE);
         dispatchAction(action, "threeds2.challengeResult");
     }

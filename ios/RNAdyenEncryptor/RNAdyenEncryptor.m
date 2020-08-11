@@ -30,14 +30,14 @@ RCT_EXPORT_METHOD(encryptWithData: (NSDictionary *)data) {
   [wrapper encryptCard];
 }
 
-RCT_EXPORT_METHOD(identify: (NSString *)identifyToken) {
+RCT_EXPORT_METHOD(identify: (NSString*)token setPaymentData:(NSString*)paymentData) {
     AdyenThreeDS2Wrapper *wrapper = [AdyenThreeDS2Wrapper new];
-    [wrapper identify:identifyToken];
+    [wrapper identify:token paymentData:paymentData];
 }
 
-RCT_EXPORT_METHOD(challenge: (NSString *)challengeToken) {
+RCT_EXPORT_METHOD(challenge: (NSString*)token setPaymentData:(NSString*)paymentData) {
     AdyenThreeDS2Wrapper *wrapper = [AdyenThreeDS2Wrapper new];
-    [wrapper challenger:challengeToken];
+    [wrapper challenger:token paymentData:paymentData];
 }
 
 - (NSString *)safeString:(id)object {
@@ -49,7 +49,5 @@ RCT_EXPORT_METHOD(challenge: (NSString *)challengeToken) {
     return [NSString stringWithFormat:@"%@", object];
   }
 }
-
-
 
 @end

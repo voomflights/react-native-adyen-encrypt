@@ -8,31 +8,37 @@
 import Foundation
 import Adyen
 
+let threeDS2ComponentSingleton = ThreeDS2Component()
+
 public class HelperThreeDS2: NSObject, ActionComponentDelegate {
     
     let threeDS2Component: ThreeDS2Component
     
     public override init() {
-        threeDS2Component = ThreeDS2Component()
+        threeDS2Component = threeDS2ComponentSingleton
         super.init()
         self.threeDS2Component.delegate = self
     }
     
-    public func identify(_ token: String?) {
-        guard let token = token else { return }
-        let action = ThreeDS2FingerprintAction(token: token, paymentData: "")
+    public func identify(_ token: String?, _ paymentData: String?) {
+        guard let token = token, let paymentData = paymentData else { return }
+        let action = ThreeDS2FingerprintAction(token: token, paymentData: paymentData)
         self.threeDS2Component.handle(action)
     }
     
-    public func challenger(_ token: String?) {
-        guard let token = token else { return }
-        let action = ThreeDS2ChallengeAction(token: token, paymentData: "")
+    public func challenger(_ token: String?, _ paymentData: String?) {
+        guard let token = token, let paymentData = paymentData else { return }
+        let action = ThreeDS2ChallengeAction(token: token, paymentData: paymentData)
         self.threeDS2Component.handle(action)
     }
     
     public func didProvide(_ data: ActionComponentData, from component: ActionComponent) {
-        print("didProvide",data)
-        RNAdyenEventEmitter.sharedInstance().emitEncryptedCard(data)
+    let dictionary = data.details.dictionaryRepresentation;
+        if let jsonData = try? JSONSerialization.data( withJSONObject: dictionary,   options: .prettyPrinted  ) {
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                RNAdyenEventEmitter.sharedInstance().emitEncryptedCard(jsonString)
+            }
+        }
     }
     
     public func didFail(with error: Error, from component: ActionComponent) {

@@ -5,15 +5,16 @@
 //  Created by Kenneth Rangel on 06.08.20.
 //
 
+
+let helperSingleton = HelperThreeDS2()
+
 @objc public class AdyenThreeDS2Wrapper: NSObject {
-    @objc public func identify(_ fingerprintToken: String?) {
-        guard let fingerprintToken = fingerprintToken else { return }
-        let helper = HelperThreeDS2()
-        helper.identify(fingerprintToken)
+    @objc public func identify(_ token: String?, paymentData: String?) {
+        guard let token = token, let  paymentData = paymentData else { return }
+        helperSingleton.identify(token, paymentData)
      } 
-    @objc public func challenger(_ challengeToken: String?) {
-        guard let challengeToken = challengeToken else { return }
-        let helper = HelperThreeDS2()
-        helper.challenger(challengeToken)
+    @objc public func challenger(_ token: String?, paymentData: String?) {
+        guard let token = token, let paymentData = paymentData else { return }
+        helperSingleton.challenger(token, paymentData)
      }
 }
