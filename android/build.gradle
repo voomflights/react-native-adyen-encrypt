@@ -31,6 +31,7 @@ buildscript {
         repositories {
             google()
             jcenter()
+            mavenCentral()
         }
         dependencies {
             classpath 'com.android.tools.build:gradle:3.4.2'
@@ -74,6 +75,8 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
     implementation "com.adyen.checkout:card-ui:3.6.4"
+    implementation "com.adyen.checkout:3ds2:3.6.4"
+    implementation 'org.jdeferred.v2:jdeferred-android-aar:2.0.0'
 }
 
 def configureReactNativePom(def pom) {

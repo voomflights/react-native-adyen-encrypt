@@ -19,9 +19,8 @@ public class RNAdyenPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(
             ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-
-        modules.add(new RNAdyenModule(reactContext));
-
+        modules.add(new RNAdyenEncryptorModule(reactContext));
         return modules;
     }
+
 }

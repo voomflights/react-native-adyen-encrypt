@@ -1,7 +1,7 @@
 {
   "name": "react-native-adyen-encrypt",
   "title": "React Native Adyen Encryption",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Cross platform way to encrypt cards for use with Adyen (www.adyen.com) on react native",
   "main": "index.js",
   "repository": "github:voomflights/react-native-adyen-encrypt",
@@ -16,7 +16,8 @@
   "contributors": [
     "Antoine Dreessen <anthonydreessen@gmail.com> (https://plenti.dev)",
     "Emily Gordon <emgord@gmail.com>",
-    "Evgenii Evstropov <evgenii.evstropov@gmail.com>"
+    "Evgenii Evstropov <evgenii.evstropov@gmail.com>",
+    "Kenneth Rangel <kennethrc@gmail.com>"
   ],
   "license": "MIT",
   "readmeFilename": "README.md",
