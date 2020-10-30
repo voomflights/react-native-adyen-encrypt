@@ -17,7 +17,7 @@ iOS uses [Adyen](https://github.com/Adyen/adyen-ios) SDK version 3.6.0
 1. Install package with `$ npm install react-native-adyen-encrypt --save`
 2. That should be it 😅
 
-Android uses [Adyen](https://github.com/Adyen/adyen-android) SDK version 3.6.5
+Android uses [Adyen](https://github.com/Adyen/adyen-android) SDK version 3.7.1
 
 ## Usage
 
