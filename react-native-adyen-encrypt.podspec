@@ -19,6 +19,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "Adyen", '3.6.0'
+  s.dependency "Adyen", '3.8.2'
 end
 
