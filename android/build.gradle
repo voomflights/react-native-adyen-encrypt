@@ -74,8 +74,8 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-    implementation "com.adyen.checkout:card-ui:3.7.1"
-    implementation "com.adyen.checkout:3ds2:3.7.1"
+    implementation "com.adyen.checkout:card-ui:3.8.0"
+    implementation "com.adyen.checkout:3ds2:3.8.0"
     implementation 'org.jdeferred.v2:jdeferred-android-aar:2.0.0'
 }
 

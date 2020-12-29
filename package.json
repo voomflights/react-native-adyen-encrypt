@@ -1,7 +1,7 @@
 {
   "name": "react-native-adyen-encrypt",
   "title": "React Native Adyen Encryption",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Cross platform way to encrypt cards for use with Adyen (www.adyen.com) on react native",
   "main": "index.js",
   "repository": "github:voomflights/react-native-adyen-encrypt",
