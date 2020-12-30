@@ -201,7 +201,6 @@ public class RNAdyenEncryptorModule extends ReactContextBaseJavaModule {
         action.setUrl(url);
         action.setType(RedirectAction.ACTION_TYPE);
         action.setPaymentData(paymentData);
-//        action.setMethod("GET");
 
         final Deferred<RedirectComponent, Throwable, Void> deferred = new DeferredObject<>();
         new Handler(Looper.getMainLooper())
