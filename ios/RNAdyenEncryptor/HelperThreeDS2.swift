@@ -9,15 +9,19 @@ import Foundation
 import Adyen
 
 let threeDS2ComponentSingleton = ThreeDS2Component()
+let redirectComponentSingleton = RedirectComponent()
 
 public class HelperThreeDS2: NSObject, ActionComponentDelegate {
     
     let threeDS2Component: ThreeDS2Component
+    let redirectComponent: RedirectComponent
     
     public override init() {
         threeDS2Component = threeDS2ComponentSingleton
+        redirectComponent = redirectComponentSingleton
         super.init()
         self.threeDS2Component.delegate = self
+        self.redirectComponent.delegate = self
     }
     
     public func identify(_ token: String?, _ paymentData: String?) {
@@ -32,13 +36,20 @@ public class HelperThreeDS2: NSObject, ActionComponentDelegate {
         self.threeDS2Component.handle(action)
     }
     
+    public func redirect(_ url: String?, _ paymentData: String?) {
+        guard let url = url, let paymentData = paymentData else { return }
+        let action = RedirectAction(url: URL(string: url)!, paymentData: paymentData)
+        self.redirectComponent.handle(action)
+    }
+    
     public func didProvide(_ data: ActionComponentData, from component: ActionComponent) {
-    let dictionary = data.details.dictionaryRepresentation;
-        if let jsonData = try? JSONSerialization.data( withJSONObject: dictionary,   options: .prettyPrinted  ) {
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                RNAdyenEventEmitter.sharedInstance().emitEncryptedCard(jsonString)
+        NSLog("did provide")
+        let dictionary = data.details.dictionaryRepresentation;
+            if let jsonData = try? JSONSerialization.data( withJSONObject: dictionary,   options: .prettyPrinted  ) {
+                if let jsonString = String(data: jsonData, encoding: .utf8) {
+                    RNAdyenEventEmitter.sharedInstance().emitEncryptedCard(jsonString)
+                }
             }
-        }
     }
     
     public func didFail(with error: Error, from component: ActionComponent) {

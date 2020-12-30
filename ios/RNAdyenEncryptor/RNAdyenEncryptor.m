@@ -40,6 +40,11 @@ RCT_EXPORT_METHOD(challenge: (NSString*)token setPaymentData:(NSString*)paymentD
     [wrapper challenger:token paymentData:paymentData];
 }
 
+RCT_EXPORT_METHOD(redirect: (NSString*)url setPaymentData:(NSString*)paymentData) {
+    AdyenThreeDS2Wrapper *wrapper = [AdyenThreeDS2Wrapper new];
+    [wrapper redirect:url paymentData:paymentData];
+}
+
 - (NSString *)safeString:(id)object {
   if ([object isKindOfClass:[NSString class]]) {
     return (NSString *)object;
