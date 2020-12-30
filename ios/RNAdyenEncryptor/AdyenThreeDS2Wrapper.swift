@@ -17,4 +17,9 @@ let helperSingleton = HelperThreeDS2()
         guard let token = token, let paymentData = paymentData else { return }
         helperSingleton.challenger(token, paymentData)
      }
+    
+    @objc public func redirect(_ url: String?, paymentData: String?) {
+        guard let url = url, let paymentData = paymentData else { return }
+        helperSingleton.redirect(url, paymentData)
+     }
 }

@@ -42,3 +42,9 @@ promise.then((data: EncryptedCard) => {
   // do something neat
 })
 ```
+
+### Redirect component
+
+Check documentation for native code changes required to support redirects
+https://docs.adyen.com/checkout/android/components#redirect-component
+
