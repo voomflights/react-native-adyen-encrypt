@@ -3,10 +3,8 @@ package com.reactlibrary;
 import android.app.Activity;
 
 import androidx.lifecycle.Observer;
-
 import android.os.Handler;
 import android.os.Looper;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
@@ -36,17 +34,35 @@ import org.json.JSONObject;
 
 import com.adyen.checkout.adyen3ds2.Adyen3DS2Component;
 
-
-
 public class RNAdyenEncryptorModule extends ReactContextBaseJavaModule {
 
     private final String SUCCESS_CALLBACK = "AdyenCardEncryptedSuccess";
     private final String ERROR_CALLBACK = "AdyenCardEncryptedError";
     private final ReactApplicationContext reactContext;
+    private Adyen3DS2Component authenticator;
+    private RedirectComponent redirectComponent;
+    private Callback callback;
+    private Callback redirectCallback;
 
-    public RNAdyenEncryptorModule(ReactApplicationContext reactContext) {
+    public RNAdyenEncryptorModule(final ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
+        this.redirectCallback = new Callback() {
+            @Override
+            public void onSuccess(ActionComponentData data) {
+                final JSONObject details = data.getDetails();
+                if (details != null) {
+                    reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(SUCCESS_CALLBACK, details.toString());
+                } else {
+                    reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(ERROR_CALLBACK, "String is empty?");
+                }
+            }
+
+            @Override
+            public void onError(ComponentError error) {
+                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(ERROR_CALLBACK, error.getErrorMessage());
+            }
+        };
     }
 
     @Override
@@ -83,10 +99,6 @@ public class RNAdyenEncryptorModule extends ReactContextBaseJavaModule {
 
         reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(SUCCESS_CALLBACK, encryptedCardMap);
     }
-
-    private Adyen3DS2Component authenticator;
-    private RedirectComponent redirectComponent;
-    private Callback callback;
 
     private interface Callback {
         void onSuccess(ActionComponentData data);
@@ -195,6 +207,46 @@ public class RNAdyenEncryptorModule extends ReactContextBaseJavaModule {
         dispatchAction(action, "threeds2.challengeResult");
     }
 
+
+    private Deferred<RedirectComponent, Throwable, Void> getRedirector() {
+        final Deferred<RedirectComponent, Throwable, Void> deferred = new DeferredObject<>();
+
+        if (redirectComponent == null) {
+            new Handler(Looper.getMainLooper())
+                    .post(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                final Activity activity = getCurrentActivity();
+                                final FragmentActivity fragmentActivity = (FragmentActivity) activity;
+                                redirectComponent = RedirectComponent.PROVIDER.get(fragmentActivity);
+
+                                redirectComponent.observe(fragmentActivity, new Observer<ActionComponentData>() {
+                                    @Override
+                                    public void onChanged(@Nullable ActionComponentData actionComponentData) {
+                                        RNAdyenEncryptorModule.this.redirectCallback.onSuccess(actionComponentData);
+                                    }
+                                });
+
+                                redirectComponent.observeErrors(fragmentActivity, new Observer<ComponentError>() {
+                                    @Override
+                                    public void onChanged(@Nullable ComponentError componentError) {
+                                        RNAdyenEncryptorModule.this.redirectCallback.onError(componentError);
+                                    }
+                                });
+                                deferred.resolve(redirectComponent);
+                            } catch (Throwable e) {
+                                deferred.reject(e);
+                            }
+                        }
+                    });
+        } else {
+            deferred.resolve(redirectComponent);
+        }
+        return deferred;
+    }
+
+
     @ReactMethod
     public void redirect(final String url, final String paymentData) {
         final RedirectAction action = new RedirectAction();
@@ -202,47 +254,7 @@ public class RNAdyenEncryptorModule extends ReactContextBaseJavaModule {
         action.setType(RedirectAction.ACTION_TYPE);
         action.setPaymentData(paymentData);
 
-        final Deferred<RedirectComponent, Throwable, Void> deferred = new DeferredObject<>();
-        new Handler(Looper.getMainLooper())
-                .post(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            final Activity activity = getCurrentActivity();
-
-                            if (activity == null) {
-                                deferred.reject(null);
-                            }
-
-                            final FragmentActivity fragmentActivity = (FragmentActivity) activity;
-                            redirectComponent = RedirectComponent.PROVIDER.get(fragmentActivity);
-
-                            redirectComponent.observe(fragmentActivity, new Observer<ActionComponentData>() {
-                                @Override
-                                public void onChanged(@Nullable ActionComponentData actionComponentData) {
-                                    final JSONObject details = actionComponentData.getDetails();
-                                    if (details != null) {
-                                        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(SUCCESS_CALLBACK, details.toString());
-                                    } else {
-                                        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(ERROR_CALLBACK, "empty return");
-                                    }
-                                }
-                            });
-
-                            redirectComponent.observeErrors(fragmentActivity, new Observer<ComponentError>() {
-                                @Override
-                                public void onChanged(@Nullable ComponentError componentError) {
-                                    reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(ERROR_CALLBACK, componentError.getErrorMessage());
-                                }
-                            });
-                            deferred.resolve(redirectComponent);
-                        } catch (Throwable e) {
-                            deferred.reject(e);
-                        }
-                    }
-                });
-
-        deferred.then(new DoneCallback<RedirectComponent>() {
+        getRedirector().then(new DoneCallback<RedirectComponent>() {
             @Override
             public void onDone(RedirectComponent redirectComponent) {
                 if (redirectComponent == null) {
@@ -252,6 +264,16 @@ public class RNAdyenEncryptorModule extends ReactContextBaseJavaModule {
 
                 final Activity activity = getCurrentActivity();
                 redirectComponent.handleAction(activity, action);
+            }
+        }, new FailCallback<Throwable>() {
+            @Override
+            public void onFail(Throwable result) {
+                if (result != null) {
+                    reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(ERROR_CALLBACK, result.toString());
+                } else {
+                    reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(ERROR_CALLBACK, "error null");
+                }
+
             }
         });
     }
