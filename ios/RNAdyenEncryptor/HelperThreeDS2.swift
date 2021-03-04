@@ -43,6 +43,7 @@ public class HelperThreeDS2: NSObject, ActionComponentDelegate {
     }
 
     public func didProvide(_ data: ActionComponentData, from component: ActionComponent) {
+        self.redirectComponent.dismiss(true, completion: nil)
         let dictionary = data.details.dictionaryRepresentation;
             if let jsonData = try? JSONSerialization.data( withJSONObject: dictionary,   options: .prettyPrinted  ) {
                 if let jsonString = String(data: jsonData, encoding: .utf8) {
@@ -52,6 +53,7 @@ public class HelperThreeDS2: NSObject, ActionComponentDelegate {
     }
 
     public func didFail(with error: Error, from component: ActionComponent) {
+        self.redirectComponent.dismiss(true, completion: nil)
         var json: [String: String] = [:]
         json["error"] = error.localizedDescription
         let nserror = error as NSError
