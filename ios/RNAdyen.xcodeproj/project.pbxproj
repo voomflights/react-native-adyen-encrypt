@@ -11,6 +11,8 @@
 		90BE078C2404A987000A1DB4 /* EncryptedCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE078B2404A987000A1DB4 /* EncryptedCardData.swift */; };
 		90BE078F2404A9A0000A1DB4 /* RNAdyenEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BE078E2404A9A0000A1DB4 /* RNAdyenEncryptor.m */; };
 		90BE07932404A9CD000A1DB4 /* RNAdyenEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BE07922404A9CD000A1DB4 /* RNAdyenEventEmitter.m */; };
+		E990BE4424DD88F200D75AE8 /* HelperThreeDS2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E990BE4324DD88F200D75AE8 /* HelperThreeDS2.swift */; };
+		E990BE4824DD891000D75AE8 /* AdyenThreeDS2Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E990BE4524DD891000D75AE8 /* AdyenThreeDS2Wrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +36,8 @@
 		90BE07912404A9CD000A1DB4 /* RNAdyenEventEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNAdyenEventEmitter.h; sourceTree = "<group>"; };
 		90BE07922404A9CD000A1DB4 /* RNAdyenEventEmitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNAdyenEventEmitter.m; sourceTree = "<group>"; };
 		90BE07AA2404B02B000A1DB4 /* RNAdyen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNAdyen.h; sourceTree = "<group>"; };
+		E990BE4324DD88F200D75AE8 /* HelperThreeDS2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperThreeDS2.swift; sourceTree = "<group>"; };
+		E990BE4524DD891000D75AE8 /* AdyenThreeDS2Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdyenThreeDS2Wrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +72,12 @@
 		90BE07882404A958000A1DB4 /* RNAdyenEncryptor */ = {
 			isa = PBXGroup;
 			children = (
+				E990BE4524DD891000D75AE8 /* AdyenThreeDS2Wrapper.swift */,
 				90BE07892404A972000A1DB4 /* AdyenEncryptorWrapper.swift */,
 				90BE078B2404A987000A1DB4 /* EncryptedCardData.swift */,
 				90BE078D2404A9A0000A1DB4 /* RNAdyenEncryptor.h */,
 				90BE078E2404A9A0000A1DB4 /* RNAdyenEncryptor.m */,
+				E990BE4324DD88F200D75AE8 /* HelperThreeDS2.swift */,
 			);
 			path = RNAdyenEncryptor;
 			sourceTree = "<group>";
@@ -143,6 +149,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E990BE4824DD891000D75AE8 /* AdyenThreeDS2Wrapper.swift in Sources */,
+				E990BE4424DD88F200D75AE8 /* HelperThreeDS2.swift in Sources */,
 				90BE078C2404A987000A1DB4 /* EncryptedCardData.swift in Sources */,
 				90BE07932404A9CD000A1DB4 /* RNAdyenEventEmitter.m in Sources */,
 				90BE078A2404A972000A1DB4 /* AdyenEncryptorWrapper.swift in Sources */,

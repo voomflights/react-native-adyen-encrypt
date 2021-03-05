@@ -31,6 +31,7 @@ buildscript {
         repositories {
             google()
             jcenter()
+            mavenCentral()
         }
         dependencies {
             classpath 'com.android.tools.build:gradle:3.4.2'
@@ -73,7 +74,10 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-    implementation "com.adyen.checkout:card-ui:3.6.4"
+    implementation "com.adyen.checkout:redirect:3.8.0"
+    implementation "com.adyen.checkout:card-ui:3.8.0"
+    implementation "com.adyen.checkout:3ds2:3.8.0"
+    implementation 'org.jdeferred.v2:jdeferred-android-aar:2.0.0'
 }
 
 def configureReactNativePom(def pom) {
@@ -144,7 +148,7 @@ afterEvaluate { project ->
         repositories.mavenDeployer {
             // Deploy to react-native-event-bridge/maven, ready to publish to npm
             repository url: "file://${projectDir}/../android/maven"
-            configureReactNativePom pom
+//            configureReactNativePom pom
         }
     }
 }

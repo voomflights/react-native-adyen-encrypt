@@ -31,11 +31,15 @@ static RNAdyenEventEmitter *sharedInstance = nil;
 
 - (NSArray<NSString *> *)supportedEvents
 {
-  return @[@"AdyenCardEncryptedSuccess", @"AdyenCardEncryptedFailure"];
+  return @[@"AdyenCardEncryptedSuccess", @"AdyenCardEncryptedError"];
 }
 
 - (void)emitEncryptedCard:(id)body {
   [self sendEventWithName:@"AdyenCardEncryptedSuccess" body:body];
+}
+
+- (void)emitEncryptedCardError:(id)body {
+  [self sendEventWithName:@"AdyenCardEncryptedError" body:body];
 }
 
 @end

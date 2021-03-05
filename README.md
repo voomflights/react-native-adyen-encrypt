@@ -10,10 +10,14 @@
 4. Verify that your SWIFT_VERSION is >= 5
 5. `pod install`
 
+iOS uses [Adyen](https://github.com/Adyen/adyen-ios) SDK version 3.6.0
+
 ### Android
 
 1. Install package with `$ npm install react-native-adyen-encrypt --save`
 2. That should be it 😅
+
+Android uses [Adyen](https://github.com/Adyen/adyen-android) SDK version 3.7.1
 
 ## Usage
 
@@ -38,3 +42,9 @@ promise.then((data: EncryptedCard) => {
   // do something neat
 })
 ```
+
+### Redirect component
+
+Check documentation for native code changes required to support redirects
+https://docs.adyen.com/checkout/android/components#redirect-component
+

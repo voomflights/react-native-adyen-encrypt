@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (RNAdyenEventEmitter *)sharedInstance;
 - (void)emitEncryptedCard:(id)body;
+- (void)emitEncryptedCardError:(id)body;
 
 @end
 
